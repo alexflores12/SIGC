@@ -1,5 +1,8 @@
 package Beans;
+/*
+modificado por ruben y roca
 
+*/
 public class UsuarioBE {
 
     private int IndOpSp;
@@ -18,6 +21,9 @@ public class UsuarioBE {
     private boolean estado;
     private boolean inExist;
     private int idrol;
+    private String fecha_nacimiento;
+    private String estado_civil;
+    private String cuenta_facebook;
 
     public UsuarioBE() {
         this.IndOpSp = 0;
@@ -121,7 +127,7 @@ public class UsuarioBE {
 
     }
 
-    public boolean isEstado() {
+    public boolean getEstado() {
         return estado;
 
     }
@@ -209,5 +215,47 @@ public class UsuarioBE {
 
     public void setIdrol(int idrol) {
         this.idrol = idrol;
+    }
+
+    /**
+     * @return the fecha_nacimiento
+     */
+    public String getFecha_nacimiento() {
+        return fecha_nacimiento;
+    }
+
+    /**
+     * @return the estado_civil
+     */
+    public String getEstado_civil() {
+        return estado_civil;
+    }
+
+    /**
+     * @return the cuenta_facebook
+     */
+    public String getCuenta_facebook() {
+        return cuenta_facebook;
+    }
+
+    /**
+     * @param fecha_nacimiento the fecha_nacimiento to set
+     */
+    public void setFecha_nacimiento(String fecha_nacimiento) {
+        this.fecha_nacimiento = fecha_nacimiento;
+    }
+
+    /**
+     * @param estado_civil the estado_civil to set
+     */
+    public void setEstado_civil(String estado_civil) {
+        this.estado_civil = estado_civil;
+    }
+
+    /**
+     * @param cuenta_facebook the cuenta_facebook to set
+     */
+    public void setCuenta_facebook(String cuenta_facebook) {
+        this.cuenta_facebook = cuenta_facebook;
     }
 }

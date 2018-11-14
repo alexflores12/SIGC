@@ -1,16 +1,21 @@
 package Vistas;
-
+// modificado por luis eduardo
 
 import Services.RolBL;
 import Beans.UsuarioBE;
+import DAO.UsuarioDA;
+import Services.UsuarioBL;
 import util.Background;
 //import de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel;
 import java.awt.image.BufferedImage;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JDesktopPane;
@@ -66,6 +71,8 @@ public class Principal extends javax.swing.JFrame {
         jMenu7 = new javax.swing.JMenu();
         JMIAyuda = new javax.swing.JMenuItem();
         JMIAcercaDe = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Emisión de Certificados");
@@ -203,6 +210,18 @@ public class Principal extends javax.swing.JFrame {
 
         JMBMenu.add(jMenu7);
 
+        jMenu2.setText("Persona");
+
+        jMenuItem1.setText("Gestionar Persona");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        JMBMenu.add(jMenu2);
+
         setJMenuBar(JMBMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,12 +268,12 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void JMIAdminUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIAdminUsuarioActionPerformed
-        
+
         /*
-        AdministrarUsuario oAdministrarJefeOficina = new AdministrarUsuario(JDPContenedor, JTBTool, JMBMenu);
-        JDPContenedor.add(oAdministrarJefeOficina);
-        oAdministrarJefeOficina.setVisible(true);
-        */
+         AdministrarUsuario oAdministrarJefeOficina = new AdministrarUsuario(JDPContenedor, JTBTool, JMBMenu);
+         JDPContenedor.add(oAdministrarJefeOficina);
+         oAdministrarJefeOficina.setVisible(true);
+         */
     }//GEN-LAST:event_JMIAdminUsuarioActionPerformed
 
     private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
@@ -262,10 +281,10 @@ public class Principal extends javax.swing.JFrame {
 
     private void JMIAdminSecretarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JMIAdminSecretarioActionPerformed
         /*
-        AdministrarSecretarioGeneral oAdministrarSecretarioGeneral = new AdministrarSecretarioGeneral(JDPContenedor, JTBTool, JMBMenu);
-        JDPContenedor.add(oAdministrarSecretarioGeneral);
-        oAdministrarSecretarioGeneral.setVisible(true);
-        */
+         AdministrarSecretarioGeneral oAdministrarSecretarioGeneral = new AdministrarSecretarioGeneral(JDPContenedor, JTBTool, JMBMenu);
+         JDPContenedor.add(oAdministrarSecretarioGeneral);
+         oAdministrarSecretarioGeneral.setVisible(true);
+         */
     }//GEN-LAST:event_JMIAdminSecretarioActionPerformed
 
     private void JBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBSalirActionPerformed
@@ -283,20 +302,20 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_JMIAcercaDeActionPerformed
 
     private void JBImportarActasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBImportarActasActionPerformed
-        
+
         /*
-        SeleccionarTipoActaAImportar oSeleccionarTipoActaAImportar = new SeleccionarTipoActaAImportar(JDPContenedor, JTBTool, JMBMenu, idUsuario, "importar");
-        JDPContenedor.add(oSeleccionarTipoActaAImportar);
-        oSeleccionarTipoActaAImportar.setVisible(true);
-        */
+         SeleccionarTipoActaAImportar oSeleccionarTipoActaAImportar = new SeleccionarTipoActaAImportar(JDPContenedor, JTBTool, JMBMenu, idUsuario, "importar");
+         JDPContenedor.add(oSeleccionarTipoActaAImportar);
+         oSeleccionarTipoActaAImportar.setVisible(true);
+         */
     }//GEN-LAST:event_JBImportarActasActionPerformed
 
     private void JBImportarAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBImportarAlumnosActionPerformed
         /*
-        SeleccionarTipoAlumnoImportar oSeleccionarTipoAlumnoImportar = new SeleccionarTipoAlumnoImportar(JDPContenedor, JTBTool, JMBMenu);
-        JDPContenedor.add(oSeleccionarTipoAlumnoImportar);
-        oSeleccionarTipoAlumnoImportar.setVisible(true);
-        */
+         SeleccionarTipoAlumnoImportar oSeleccionarTipoAlumnoImportar = new SeleccionarTipoAlumnoImportar(JDPContenedor, JTBTool, JMBMenu);
+         JDPContenedor.add(oSeleccionarTipoAlumnoImportar);
+         oSeleccionarTipoAlumnoImportar.setVisible(true);
+         */
     }//GEN-LAST:event_JBImportarAlumnosActionPerformed
 
     private void JMIAdministrarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem15ActionPerformed
@@ -310,6 +329,13 @@ public class Principal extends javax.swing.JFrame {
         oAyuda.setVisible(true);
 
     }//GEN-LAST:event_JMIAyudaActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
+        V01GestionarPersona per = new V01GestionarPersona();
+        JDPContenedor.add(per);
+        per.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -337,7 +363,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu7;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator4;
@@ -357,8 +385,8 @@ public class Principal extends javax.swing.JFrame {
     }
 
     void llenarUsuario(UsuarioBE oUsuarioBE) {
-        //this.idUsuario = oUsuarioBE.getIdusuario();
-        //JLBUsuario.setText(oUsuarioBE.getNombre().toUpperCase() + " " + oUsuarioBE.getAppaterno().toUpperCase() + " " + oUsuarioBE.getApmaterno().toUpperCase());
+//        this.idUsuario = oUsuarioBE.getIdusuario();
+//        JLBUsuario.setText(oUsuarioBE.getNombre().toUpperCase() + " " + oUsuarioBE.getAppaterno().toUpperCase() + " " + oUsuarioBE.getApmaterno().toUpperCase());
         Date d = new Date();
         SimpleDateFormat dia = new SimpleDateFormat("EEEE dd");
         SimpleDateFormat mes = new SimpleDateFormat("MMMM");
@@ -370,29 +398,44 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void validarRolUsuario(UsuarioBE oUsuarioBE) {
-        
-        for(int i = 1; i <= 7; i++){
-            JComponent oJcomp = mapJMI.get(i);
-            oJcomp.setEnabled(true);
-        }
-        
-        /*
-        try {
-            int idRol = oUsuarioBE.getIdrol();
-            String cad = "select permiso.idpermiso from rol inner join rolpermiso "
-                    + "on rol.idrol=rolpermiso.idrol inner join permiso "
-                    + "on rolpermiso.idpermiso=permiso.idpermiso where rol.idrol=" + idRol;
 
-            RolBL oRolBL = new RolBL();
-            ResultSet rs = oRolBL.listarRS(cad);
-            while (rs.next()) {
-                int idpermiso = rs.getInt("idpermiso");
-                (mapJMI.get(idpermiso)).setEnabled(true);
+        // actualizando los menus segun el permiso que tenga
+        UsuarioBL oUsuarioBL = new UsuarioBL();
+        List<Integer> listaIds
+                = oUsuarioBL.obtenerIdVistaByUsuario(oUsuarioBE);
 
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
+        for (Integer id : listaIds) {
+            mapJMI.get(id).setEnabled(true);
         }
-        */
+
+        // mostrando los datos de la persona que se esta
+        // logueando o entrando al sistema
+        UsuarioBE oUsuarioBE2 = new UsuarioBE();
+        oUsuarioBE2 = oUsuarioBL.findUsuarioByUserAndPass(oUsuarioBE.getUsuario(), oUsuarioBE.getContrasenia());
+
+        if (oUsuarioBE2 != null) {
+            JLBUsuario.setText(oUsuarioBE2.getNombre()
+                    + " " + oUsuarioBE2.getAppaterno()
+                    + " " + oUsuarioBE2.getApmaterno());
+
+        }
+
     }
 }
+
+        //Esta recorriendo el mapJMI
+//        for (int i = 1; i <= 7; i++) {
+//            JComponent oJcomp = mapJMI.get(i);
+//            oJcomp.setEnabled(true);
+//        }
+//
+//            fila[0] = itemPer.getId() + "";
+//            fila[1] = itemPer.getNombres();
+//            fila[2] = itemPer.getApellidos();
+//            model.addRow(fila);
+//
+//        }
+//        mapJMI.get(3).setEnabled(true);
+//        mapJMI.get(4).setEnabled(true);
+//        mapJMI.get(7).setEnabled(true);
+

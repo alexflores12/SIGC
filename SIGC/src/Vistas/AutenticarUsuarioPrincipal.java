@@ -1,6 +1,5 @@
 package Vistas;
 
-
 import Services.UsuarioBL;
 import Beans.UsuarioBE;
 import util.Centrar;
@@ -16,6 +15,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JToolBar;
 
+//Modificado po ARMIN ENRIQUE
 public class AutenticarUsuarioPrincipal extends javax.swing.JInternalFrame {
 
     private URL path = getClass().getResource("/Img/loginFondo.jpg");
@@ -82,6 +82,8 @@ public class AutenticarUsuarioPrincipal extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(255, 204, 0));
         jPanel1.setOpaque(false);
 
+        JTFUsuaruio.setText("mabellanedam");
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Usuario:");
         jLabel1.setForeground(new java.awt.Color(37, 55, 82));
@@ -90,6 +92,7 @@ public class AutenticarUsuarioPrincipal extends javax.swing.JInternalFrame {
         jLabel2.setText("Password:");
         jLabel2.setForeground(new java.awt.Color(37, 55, 82));
 
+        JPFPassword.setText("123456");
         JPFPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 JPFPasswordKeyPressed(evt);
@@ -292,32 +295,35 @@ public class AutenticarUsuarioPrincipal extends javax.swing.JInternalFrame {
 }//GEN-LAST:event_JBSalirActionPerformed
 
     private void JBIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBIngresarActionPerformed
-        
-        princ.llenarUsuario(null);
-        this.dispose();
-        
-        /*
-        if (JTFUsuaruio.getText().equals("")) {
-            JOptionPane.showInternalMessageDialog(des, "Debe ingresar un usuario.");
+
+        JLBError.setText("Mensaje: ");
+        UsuarioBE oUsuarioBE;
+        if (JTFUsuaruio.getText().length() == 0) {
+            JLBError.setText("Debe ingresar su Usuario y Contraseña: ");
             JTFUsuaruio.requestFocus();
-        } else {
-            UsuarioBE oUsuarioBE = autenticarUsuario(JTFUsuaruio.getText(), JPFPassword.getPassword());
-            if (!oUsuarioBE.isInExist()) {
-                cont--;
-                if (cont == 0) {
-                    System.exit(0);
-                } else {
-                    JLBError.setText("Password incorrecto");
-                    JLBIntento.setText("Ud. tiene " + cont + " intentos para ingresar al sistema,");
-                    JPFPassword.setText("");
-                    JPFPassword.requestFocus();
-                }
-            } else {
-                princ.llenarUsuario(oUsuarioBE);
-                this.dispose();
-            }
+            return;
         }
-        */
+        if (JPFPassword.getText().length() == 0) {
+            JLBError.setText("Debe ingresar su Usuario y Contraseña: ");
+            JPFPassword.requestFocus();
+            return;
+        }
+
+        oUsuarioBE = autenticarUsuario(JTFUsuaruio.getText(), JPFPassword.getText());
+        if (oUsuarioBE.getUsuario().equals(JTFUsuaruio.getText())) {
+//            System.out.println("passsss" + oUsuarioBE.getContrasenia());
+//            if (oUsuarioBE.getContrasenia().equals(String.valueOf(JPFPassword.getPassword()))) {
+//               
+//            } else {
+//                JLBError.setText("Su Usuario o Contraseña es incorrecto ");
+//            }
+            princ.llenarUsuario(oUsuarioBE);
+            this.dispose();
+
+        } else {
+            JLBError.setText("Su Usuario o Contraseña es incorrecto ");
+        }
+
     }//GEN-LAST:event_JBIngresarActionPerformed
 
     private void JPFPasswordKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JPFPasswordKeyPressed
@@ -327,7 +333,7 @@ public class AutenticarUsuarioPrincipal extends javax.swing.JInternalFrame {
                 JOptionPane.showInternalMessageDialog(des, "Debe ingresar un usuario.");
                 JTFUsuaruio.requestFocus();
             } else {
-                UsuarioBE oUsuarioBE = autenticarUsuario(JTFUsuaruio.getText(), JPFPassword.getPassword());
+                UsuarioBE oUsuarioBE = autenticarUsuario(JTFUsuaruio.getText(), JPFPassword.getText());
                 if (!oUsuarioBE.isInExist()) {
                     cont--;
                     if (cont == 0) {
@@ -374,19 +380,20 @@ public class AutenticarUsuarioPrincipal extends javax.swing.JInternalFrame {
     private org.jdesktop.swingx.JXImagePanel jXImagePanel1;
     // End of variables declaration//GEN-END:variables
 
-    private UsuarioBE autenticarUsuario(String login, char[] password) {
+    private UsuarioBE autenticarUsuario(String login, String password) {
         UsuarioBE oUsuarioBE = null;
         try {
             UsuarioBE oUsuarioBE1 = new UsuarioBE();
             oUsuarioBE1.setIndOpSp(Commons.Common.c_numDos);
             oUsuarioBE1.setUsuario(login);
             UsuarioBL oUsuarioBL = new UsuarioBL();
-            oUsuarioBE = oUsuarioBL.listarUsuarioBE(oUsuarioBE1);
+//            oUsuarioBE = oUsuarioBL.listarUsuarioBE(oUsuarioBE1);
+            oUsuarioBE = oUsuarioBL.findUsuarioByUserAndPass(login, password);
             if (oUsuarioBE.getIdusuario() > 0) {
-                String resumen = FuncionesHash.funcionResumenMd5Cadena(java.util.Arrays.toString(JPFPassword.getPassword()).toString());
-                if (password != null && oUsuarioBE.getContrasenia() != null && resumen.equals(oUsuarioBE.getContrasenia())) {
-                    oUsuarioBE.setInExist(true);
-                }
+//                String resumen = FuncionesHash.funcionResumenMd5Cadena(java.util.Arrays.toString(JPFPassword.getPassword()).toString());
+//                if (password != null && oUsuarioBE.getContrasenia() != null && resumen.equals(oUsuarioBE.getContrasenia())) {
+//                    oUsuarioBE.setInExist(true);
+//                }
             }
         } catch (Exception ex) {
             oUsuarioBE.setInExist(false);
